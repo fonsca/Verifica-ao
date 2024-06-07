@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html lang="pt-BR">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Verificação de Notas</title>
+</head>
+
+<body>
+    <h1>Verificação de Notas</h1> <label for="nome">Nome:</label><br> <input type="text" id="nome"> <br><br> <label
+        for="matricula">Matrícula:</label><br> <input type="text" id="matricula"> <br><br> <label for="nota1">Nota
+        1:</label><br> <input type="number" id="nota1" step="0.01"> <br><br> <label for="nota2">Nota 2:</label><br>
+    <input type="number" id="nota2" step="0.01"> <br><br><br> <button onclick="verificar()">Verificar</button><br> <br>
+    <table id="resultado">
+        <tr>
+            <th>Nome</th>
+            <th>Matrícula</th>
+            <th>Nota 1</th>
+            <th>Nota 2</th>
+            <th>Média</th>
+            <th>Situação</th>
+        </tr>
+    </table>
+    <script>
+        function verificar() {
+            const nome = document.getElementById("nome").value;
+            const matricula = document.getElementById("matricula").value;
+            const nota1 = parseFloat(document.getElementById("nota1").value);
+            const nota2 = parseFloat(document.getElementById("nota2").value);
+            const media = (nota1 + nota2) / 2;
+            const situacao = media >= 5 ? "Aprovado" : "Reprovado";
+
+            // Inserir os valores na tabela
+            const tabela = document.getElementById("resultado");
+            const linha = tabela.insertRow();
+            const colunaNome = linha.insertCell(0);
+            const colunaMatricula = linha.insertCell(1);
+            const colunaNota1 = linha.insertCell(2);
+            const colunaNota2 = linha.insertCell(3);
+            const colunaMedia = linha.insertCell(4);
+            const colunaSituacao = linha.insertCell(5);
+
+            colunaNome.innerHTML = nome;
+            colunaMatricula.innerHTML = matricula;
+            colunaNota1.innerHTML = nota1;
+            colunaNota2.innerHTML = nota2;
+            colunaMedia.innerHTML = media.toFixed(2);
+            colunaSituacao.innerHTML = situacao;
+
+            if (situacao === "Aprovado") { colunaSituacao.innerHTML = `<span style="color: green;">${situacao}</span>`; } else { colunaSituacao.innerHTML = `<span style="color: red;">${situacao}</span>`; }
+        }    
+
+    </script>
+</body>
+
+</html>
